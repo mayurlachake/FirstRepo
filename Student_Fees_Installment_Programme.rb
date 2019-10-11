@@ -13,8 +13,21 @@ while i < instStructure.size
     puts "\nEnter the amount to be paid for Installment #{i+1}"
     monthlyInst = gets.to_i
     if monthlyInst > instStructure[i]
-        instStructure[i+1] = instStructure[i+1]-(monthlyInst-instStructure[i])
-        instStructure[i] = monthlyInst
+        
+        if ((monthlyInst-instStructure[i]) > instStructure[i+1])
+            j=i
+            mntinst=monthlyInst
+            while ((j < instStructure.size-1) && ((monthlyInst-instStructure[j]) >= instStructure[j+1]))
+                monthlyInst = monthlyInst-(instStructure[j]+instStructure[j+1])
+                instStructure[j+1] = 0
+                j=j+1
+            end
+            instStructure[j+1] = instStructure[j+1]-monthlyInst
+            instStructure[i] = mntinst
+        else
+            instStructure[i+1] = instStructure[i+1]-(monthlyInst-instStructure[i])
+            instStructure[i] = monthlyInst
+        end
     elsif monthlyInst < instStructure[i]
         if i==instStructure.size-1
             choice=2
