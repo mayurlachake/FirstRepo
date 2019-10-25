@@ -9,9 +9,21 @@ instStructure = Array.new(instNumber, instAmount)
 puts "\nInstallment Structure: #{instStructure}"
 structureSize = instStructure.size 
 i=0
+monthlyInst=0
 while i < instStructure.size 
-    puts "\nEnter the amount to be paid for Installment #{i+1}"
-    monthlyInst = gets.to_i
+    loop do
+        puts "\nEnter the amount to be paid for Installment #{i+1}"
+        monthlyInst = gets.to_i
+        sum = 0
+        for k in i...instStructure.size do
+            sum += instStructure[k]
+        end
+        if  sum >= monthlyInst
+            break
+        end
+        puts "\n Please enter the valid amount, less than or equal to remaining amount."
+    end
+    
     if monthlyInst > instStructure[i]
         
         if ((monthlyInst-instStructure[i]) >= instStructure[i+1])
