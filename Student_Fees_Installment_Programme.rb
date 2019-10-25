@@ -14,7 +14,7 @@ while i < instStructure.size
     monthlyInst = gets.to_i
     if monthlyInst > instStructure[i]
         
-        if ((monthlyInst-instStructure[i]) > instStructure[i+1])
+        if ((monthlyInst-instStructure[i]) >= instStructure[i+1])
             j=i
             mntinst=monthlyInst
             while ((j < instStructure.size-1) && ((monthlyInst-instStructure[j]) >= instStructure[j+1]))
@@ -22,7 +22,9 @@ while i < instStructure.size
                 instStructure[j+1] = 0
                 j=j+1
             end
-            instStructure[j+1] = instStructure[j+1]-monthlyInst
+            if (j<instStructure.size-1)
+                instStructure[j+1] = instStructure[j+1]-monthlyInst
+            end
             instStructure[i] = mntinst
         else
             instStructure[i+1] = instStructure[i+1]-(monthlyInst-instStructure[i])
@@ -45,7 +47,8 @@ while i < instStructure.size
     end 
     puts "\nInstallment Structure: #{instStructure}"
     i=i+1
+    if (j==instStructure.size-1)
+        break
+    end
 end
-if i==instStructure.size
-    puts "\nThank you, all Installments are paid now."
-end
+puts "\nThank you, all Installments are paid now."
